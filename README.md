@@ -26,7 +26,7 @@ job-application-tracker/
 ├── middleware/               # Auth Middleware
 ├── utils/                    # Utility Functions (Mailer, etc.)
 └── server.js                 # Entry point for Express backend
----
+```
 
 ## 📦 Required Dependencies
 
