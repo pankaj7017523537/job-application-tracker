@@ -15,8 +15,7 @@ A full-stack web application that allows users to efficiently **track and manage
 - 📚 **MongoDB Database Integration**
 
 ---
-
-## 🛠️ Tech Stack
+ 🛠️ Tech Stack
 
 | Frontend     | Backend      | Database   | Tools        |
 |--------------|--------------|------------|--------------|
