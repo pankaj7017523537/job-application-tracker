@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 
+<<<<<<< HEAD
 // ✅ CORS Configuration with proper headers
 app.use(
   cors({
@@ -25,11 +26,31 @@ app.use(
 app.use(express.json());
 
 // ✅ Health check route
+=======
+// ✅ CORS Configuration — allow both production & preview URLs
+app.use(
+  cors({
+    origin: [
+      "https://job-application-tracker-5mb7jubey.vercel.app", // Production
+      "https://job-application-trac-git-060903-pankaj-kumars-projects-dbf7c37a.vercel.app" // Preview
+    ],
+    credentials: true,
+  })
+);
+
+app.use(express.json());
+
+// ✅ Optional health check
+>>>>>>> 0e2a559 (Include backend changes before pull)
 app.get("/api", (req, res) => {
   res.json({ message: "API root working" });
 });
 
+<<<<<<< HEAD
 // ✅ Main routes
+=======
+// Routes
+>>>>>>> 0e2a559 (Include backend changes before pull)
 app.get("/", (req, res) => {
   res.send("Job Tracker API is running.");
 });
