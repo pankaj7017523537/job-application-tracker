@@ -16,16 +16,41 @@ export default function Signup() {
       alert("Signup successful! Please login.");
       navigate("/login");
     } catch (err) {
-      alert("Signup failed: " + err.response?.data?.msg || err.message);
+      const message =
+        err.response?.data?.msg ||
+        err.response?.data?.error ||
+        err.message ||
+        "Signup failed";
+      alert("Signup failed: " + message);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Signup</h2>
-      <input name="name" placeholder="Name" onChange={handleChange} required />
-      <input name="email" placeholder="Email" onChange={handleChange} required />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+      <input
+        name="name"
+        placeholder="Name"
+        onChange={handleChange}
+        value={form.name}
+        required
+      />
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        onChange={handleChange}
+        value={form.email}
+        required
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        onChange={handleChange}
+        value={form.password}
+        required
+      />
       <button type="submit">Register</button>
     </form>
   );
