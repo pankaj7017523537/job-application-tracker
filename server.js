@@ -8,32 +8,36 @@ dotenv.config();
 
 const app = express();
 
-// ✅ CORS Configuration — allow both production & preview URLs
+// ✅ CORS Configuration with proper headers
 app.use(
   cors({
     origin: [
-      "https://job-application-tracker-5mb7jubey.vercel.app", // Production
-      "https://job-application-trac-git-060903-pankaj-kumars-projects-dbf7c37a.vercel.app" // Preview
+      "https://job-application-tracker-5mb7jubey.vercel.app", // Production Vercel URL
+      "https://job-application-trac-git-060903-pankaj-kumars-projects-dbf7c37a.vercel.app" // Preview Vercel URL
     ],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"], // ✅ Allow Bearer tokens
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Optional: Explicitly list methods
   })
 );
 
+// ✅ Middleware
 app.use(express.json());
 
-// ✅ Optional health check
+// ✅ Health check route
 app.get("/api", (req, res) => {
   res.json({ message: "API root working" });
 });
 
-// Routes
+// ✅ Main routes
 app.get("/", (req, res) => {
   res.send("Job Tracker API is running.");
 });
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/jobs", require("./routes/jobRoutes"));
 
-// MongoDB Connect & Server Start
+// ✅ MongoDB connection and server start
 const PORT = process.env.PORT || 5000;
 
 mongoose
