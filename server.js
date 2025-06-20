@@ -1,3 +1,4 @@
+// server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -6,8 +7,24 @@ const cors = require("cors");
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// ✅ CORS Configuration — allow both production & preview URLs
+app.use(
+  cors({
+    origin: [
+      "https://job-application-tracker-5mb7jubey.vercel.app", // Production
+      "https://job-application-trac-git-060903-pankaj-kumars-projects-dbf7c37a.vercel.app" // Preview
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+
+// ✅ Optional health check
+app.get("/api", (req, res) => {
+  res.json({ message: "API root working" });
+});
 
 // Routes
 app.get("/", (req, res) => {
