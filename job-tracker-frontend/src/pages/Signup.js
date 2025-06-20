@@ -4,13 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (form.password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
+
+    setLoading(true);
     try {
       await API.post("/auth/signup", form);
       alert("Signup successful! Please login.");
@@ -22,6 +31,8 @@ export default function Signup() {
         err.message ||
         "Signup failed";
       alert("Signup failed: " + message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,7 +62,9 @@ export default function Signup() {
         value={form.password}
         required
       />
-      <button type="submit">Register</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Registering..." : "Register"}
+      </button>
     </form>
   );
 }
